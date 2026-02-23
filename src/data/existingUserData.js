@@ -1,6 +1,6 @@
 export const existingUserData = {
   userName: 'John',
-  creditScore: 642,
+  creditScore: 750,
   status: 'Almost Ready!',
   progressBalance: '25/32',
   progressPercentage: 78,

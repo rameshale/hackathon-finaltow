@@ -9,163 +9,208 @@ import { existingUserData } from "../data/existingUserData";
 function ExistingUserDashboard() {
   return (
     <Layout userName={existingUserData.userName} showGreeting={true}>
-      <div className="px-4 py-6 max-w-[1400px] mx-auto">
-        <div className="bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 rounded-3xl shadow-2xl p-8">
+      <div className="mx-auto max-w-[1400px] space-y-1 px-8">
 
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">
-            Hi {existingUserData.userName},{" "}
-            <span className="font-normal text-gray-700">Welcome back, John!</span>
+        {/* Header Section */}
+        <div className="flex flex-col gap-3">
+          <h2 className="text-3xl font-semibold tracking-tight text-slate-900">
+            Hi {existingUserData.userName},
+            <span className="ml-2 font-normal text-slate-500">
+              welcome back.
+            </span>
           </h2>
+          <p className="text-sm text-slate-500">
+            Here’s a snapshot of your credit growth journey.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        {/* Top Grid */}
+        <div className="grid grid-cols-1 gap-8 xl:grid-cols-3">
 
-            <div className="space-y-6">
-              <InfoCard title="Your Current Progress">
+          {/* LEFT COLUMN */}
+          <div className="space-y-8">
+
+            {/* Current Progress */}
+            <InfoCard title="Your Current Progress">
+              <div className="space-y-6">
                 <CreditScoreGauge
                   score={existingUserData.creditScore}
                   status={existingUserData.status}
                 />
 
-                <div className="mt-6 flex items-center space-x-2 border-t border-gray-300 pt-4">
-                  <CheckCircle className="w-5 h-5 text-gray-900" />
-                  <span className="font-bold text-gray-900 text-sm">
-                    Progress Balance {existingUserData.progressBalance}
+                <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-emerald-500" />
+                    <span className="text-sm font-medium text-slate-700">
+                      Progress Balance
+                    </span>
+                  </div>
+                  <span className="text-sm font-semibold text-slate-900">
+                    {existingUserData.progressBalance}
                   </span>
                 </div>
-              </InfoCard>
+              </div>
+            </InfoCard>
 
-              <InfoCard title="Success Story">
-                <div className="flex items-start space-x-4">
-                  <img
-                    src={existingUserData.successStory.image}
-                    alt="Success"
-                    className="w-16 h-16 rounded-full object-cover shadow-md"
-                  />
-                  <div>
-                    <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-md text-xs font-bold inline-block mb-2">
-                      +20 pts
-                    </div>
-                    <p className="text-gray-700 text-sm leading-relaxed italic">
-                      "{existingUserData.successStory.quote}"
-                    </p>
-                  </div>
+            {/* Success Story */}
+            <InfoCard title="Success Story">
+              <div className="flex items-start gap-4">
+                <img
+                  src={existingUserData.successStory.image}
+                  alt="Success"
+                  className="h-14 w-14 rounded-full object-cover ring-2 ring-white shadow-sm"
+                />
+                <div className="space-y-3">
+                  <span className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
+                    +20 pts improvement
+                  </span>
+                  <p className="text-sm leading-relaxed text-slate-600 italic">
+                    “{existingUserData.successStory.quote}”
+                  </p>
                 </div>
-              </InfoCard>
-            </div>
+              </div>
+            </InfoCard>
+          </div>
 
-            <InfoCard>
-              <div className="flex items-center space-x-2 mb-4">
-                <CheckCircle className="w-6 h-6 text-green-600" />
-                <h3 className="text-xl font-bold text-gray-900">
+          {/* CENTER COLUMN - Credit Coach */}
+          <InfoCard>
+            <div className="space-y-6">
+
+              <div className="flex items-center gap-2">
+                <div className="rounded-lg bg-emerald-50 p-2">
+                  <CheckCircle className="h-5 w-5 text-emerald-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900">
                   Credit Coach Update
                 </h3>
               </div>
 
-              <div className="flex items-center justify-center space-x-4 my-6">
-                <div className="text-6xl">👨‍💼</div>
-                <Lightbulb className="w-16 h-16 text-yellow-400 drop-shadow-md" />
+              <div className="flex items-center justify-center gap-6 py-4">
+                <div className="text-5xl">👨‍💼</div>
+                <Lightbulb className="h-14 w-14 text-amber-400" />
               </div>
 
-              <h4 className="text-2xl font-bold text-gray-900 mb-3">
-                {existingUserData.coachUpdate.title}
-              </h4>
+              <div className="space-y-3">
+                <h4 className="text-xl font-semibold text-slate-900">
+                  {existingUserData.coachUpdate.title}
+                </h4>
+                <p className="text-sm leading-relaxed text-slate-600">
+                  {existingUserData.coachUpdate.message}
+                </p>
+              </div>
 
-              <p className="text-gray-700 mb-4 leading-relaxed">
-                {existingUserData.coachUpdate.message}
-              </p>
-
-              <div className="flex items-center space-x-2 mb-4">
-                <CheckCircle className="w-5 h-5 text-green-600" />
-                <span className="text-green-700 font-bold">
+              <div className="flex items-center gap-2 rounded-lg bg-emerald-50 px-4 py-3">
+                <CheckCircle className="h-5 w-5 text-emerald-600" />
+                <span className="text-sm font-medium text-emerald-700">
                   {existingUserData.coachUpdate.pointsRemain}
                 </span>
               </div>
 
-              <ul className="space-y-2 mb-6">
+              <ul className="space-y-3">
                 {existingUserData.coachUpdate.nextSteps.map((step, index) => (
                   <li
                     key={index}
-                    className="flex items-center space-x-2 text-gray-700"
+                    className="flex items-start gap-2 text-sm text-slate-700"
                   >
-                    <CheckCircle className="w-5 h-5 text-yellow-500" />
-                    <span className="font-medium">{step}</span>
+                    <CheckCircle className="mt-0.5 h-4 w-4 text-amber-500" />
+                    <span>{step}</span>
                   </li>
                 ))}
               </ul>
 
-              <button className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-3.5 rounded-xl flex justify-center items-center space-x-2 transition-all shadow-md hover:shadow-lg">
-                <span>Next Steps</span>
-                <ArrowRight className="w-5 h-5" />
+              <button className="group w-full rounded-xl bg-slate-900 px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-slate-800 hover:shadow-md active:scale-[0.98]">
+                <div className="flex items-center justify-center gap-2">
+                  <span>Next Steps</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </div>
               </button>
-            </InfoCard>
 
-            <InfoCard>
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-bold text-gray-900 text-lg">
-                  Recommended Starter Options
+            </div>
+          </InfoCard>
+
+          {/* RIGHT COLUMN - Starter Options */}
+          <InfoCard>
+            <div className="space-y-6">
+
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-slate-900">
+                  Recommended Starter Option
                 </h3>
-                <ArrowRight className="w-5 h-5 text-gray-500" />
+                <ArrowRight className="h-5 w-5 text-slate-400" />
               </div>
 
-              <div className="bg-gradient-to-br from-blue-900 to-blue-700 rounded-2xl p-6 mb-5 shadow-lg">
-                <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-6 h-6 bg-yellow-500 rounded" />
-                  <span className="text-white font-bold text-lg">synchrony</span>
-                </div>
-                <div className="bg-white rounded-xl p-5 shadow-inner">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="text-4xl">💳</div>
-                    <div className="flex space-x-1">
-                      <div className="w-8 h-6 bg-red-500 rounded" />
-                      <div className="w-8 h-6 bg-yellow-400 rounded" />
-                    </div>
+              {/* Card Preview */}
+              <div className="rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 p-6 shadow-md">
+                <div className="flex items-center justify-between text-white">
+                  <span className="text-sm font-medium tracking-wide opacity-80">
+                    Synchrony
+                  </span>
+                  <div className="flex gap-1">
+                    <div className="h-4 w-6 rounded bg-red-500" />
+                    <div className="h-4 w-6 rounded bg-yellow-400" />
                   </div>
-                  <div className="text-xs text-gray-500 font-mono">•••• 1234</div>
+                </div>
+
+                <div className="mt-10 text-sm font-mono tracking-widest text-white/70">
+                  •••• 1234
                 </div>
               </div>
 
-              <h4 className="font-bold text-xl text-gray-900 mb-4">
+              <h4 className="text-xl font-semibold text-slate-900">
                 {existingUserData.starterOption.title}
               </h4>
 
-              <ul className="space-y-2 mb-6">
+              <ul className="space-y-2">
                 {existingUserData.starterOption.benefits.map(
                   (benefit, index) => (
-                    <li key={index} className="text-gray-700 text-sm font-medium flex items-start">
-                      <span className="mr-2">•</span>
+                    <li
+                      key={index}
+                      className="flex items-start gap-2 text-sm text-slate-600"
+                    >
+                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-slate-400" />
                       <span>{benefit}</span>
                     </li>
                   )
                 )}
               </ul>
 
-              <button className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-3.5 rounded-xl flex justify-center items-center space-x-2 transition-all shadow-md hover:shadow-lg">
-                <span>{existingUserData.starterOption.buttonText}</span>
-                <ArrowRight className="w-5 h-5" />
+              <button className="group w-full rounded-xl border border-slate-200 bg-white px-5 py-3.5 text-sm font-semibold text-slate-900 shadow-sm transition-all duration-200 hover:bg-slate-50 hover:shadow-md active:scale-[0.98]">
+                <div className="flex items-center justify-center gap-2">
+                  <span>{existingUserData.starterOption.buttonText}</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </div>
               </button>
-            </InfoCard>
-          </div>
 
-          <InfoCard title="Your Credit Improvement Plan">
+            </div>
+          </InfoCard>
+        </div>
+
+        {/* Improvement Plan Section */}
+        <InfoCard title="Your Credit Improvement Plan">
+          <div className="space-y-8">
+
             <ProgressBar
               current={existingUserData.improvementPlan.progress}
               total={existingUserData.improvementPlan.total}
               label={existingUserData.improvementPlan.title}
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {existingUserData.improvementPlan.tasks.map((task) => (
                 <TaskItem key={task.id} task={task} />
               ))}
             </div>
 
-            <button className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 rounded-xl flex justify-center items-center space-x-2 transition-all shadow-md hover:shadow-lg">
-              <span>Track My Progress</span>
-              <ArrowRight className="w-6 h-6" />
+            <button className="group w-full rounded-xl bg-slate-900 px-6 py-4 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-slate-800 hover:shadow-md active:scale-[0.98]">
+              <div className="flex items-center justify-center gap-2">
+                <span>Track My Progress</span>
+                <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+              </div>
             </button>
-          </InfoCard>
 
-        </div>
+          </div>
+        </InfoCard>
+
       </div>
     </Layout>
   );

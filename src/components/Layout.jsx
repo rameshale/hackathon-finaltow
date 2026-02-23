@@ -1,12 +1,16 @@
-import Navbar from './Navbar';
+import Navbar from "./Navbar";
 
 function Layout({ children, userName, showGreeting = false }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+    <div className="min-h-screen bg-slate-50 text-slate-900 antialiased">
+      {/* Top Navigation */}
       <Navbar userName={userName} showGreeting={showGreeting} />
-      <div className="container mx-auto px-4 py-6">
-        {children}
-      </div>
+
+      <main className="relative">
+        <div className="mx-auto">
+          <div className="">{children}</div>
+        </div>
+      </main>
     </div>
   );
 }

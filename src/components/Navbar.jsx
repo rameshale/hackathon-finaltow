@@ -12,45 +12,77 @@ function Navbar({ userName, showGreeting }) {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-900 to-blue-800 border-b border-blue-700 px-6 py-4">
-      <div className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-yellow-500 rounded-md flex items-center justify-center">
-              <div className="w-6 h-6 bg-yellow-600 rounded transform rotate-45"></div>
+    <nav className="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60">
+      <div className="mx-auto max-w-[1400px] px-8">
+        <div className="flex h-20 items-center justify-between relative">
+
+          {/* Left: Brand */}
+          <div className="flex items-center gap-3">
+         
+
+            <div className="flex flex-col leading-tight">
+             <img
+            src="https://www.synchrony.com/syc/img/2023_synchrony_basic_logo.svg"
+            alt="Synchrony Logo"
+            className="h-9 md:h-10"
+          />
             </div>
-            <span className="text-white font-semibold text-xl">synchrony</span>
           </div>
-        </div>
 
-        {showGreeting && userName && (
-          <div className="absolute left-1/2 transform -translate-x-1/2 text-center">
-            <h1 className="text-white text-3xl font-bold">Welcome back, {userName}!</h1>
-            <p className="text-blue-200 text-sm">Great progress on your credit uplift journey</p>
+          {/* Center: Greeting / Title */}
+          <div className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 text-center lg:block">
+            {showGreeting && userName ? (
+              <div className="space-y-1">
+                <h1 className="text-xl font-semibold tracking-tight text-slate-900">
+                  Welcome back, <span className="text-blue-600">{userName}</span>
+                </h1>
+                <p className="text-sm text-slate-500">
+                  You're making strong progress on your credit uplift journey
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-1">
+                <h1 className="text-xl font-semibold tracking-tight text-slate-900">
+                  Credit Uplift Engine
+                </h1>
+          
+              </div>
+            )}
           </div>
-        )}
 
-        {!showGreeting && (
-          <div className="absolute left-1/2 transform -translate-x-1/2 text-center">
-            <h1 className="text-white text-2xl font-bold">Synchrony Credit Uplift Engine</h1>
-            <p className="text-blue-200 text-xs">Driving Disruptive Innovation for Credit Growth</p>
+          {/* Right: Actions */}
+          <div className="flex items-center gap-2">
+
+            {/* Notification Button */}
+            <button
+              className="group relative flex h-10 w-10 items-center justify-center rounded-xl border border-transparent text-slate-600 transition-all duration-200 hover:border-slate-200 hover:bg-slate-100 hover:text-slate-900 active:scale-95"
+              aria-label="Notifications"
+            >
+              <Bell className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
+            </button>
+
+            {/* Messages Button */}
+            <button
+              className="group relative flex h-10 w-10 items-center justify-center rounded-xl border border-transparent text-slate-600 transition-all duration-200 hover:border-slate-200 hover:bg-slate-100 hover:text-slate-900 active:scale-95"
+              aria-label="Messages"
+            >
+              <MessageCircle className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
+            </button>
+
+            {/* Divider */}
+            <div className="mx-2 h-6 w-px bg-slate-200" />
+
+            {/* Logout Button */}
+            <button
+              onClick={handleLogout}
+              title="Logout"
+              className="group flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-md active:scale-[0.98]"
+            >
+              <LogOut className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+              <span className="hidden sm:inline">Logout</span>
+            </button>
           </div>
-        )}
 
-        <div className="flex items-center space-x-4">
-          <button className="text-white hover:text-blue-200 transition">
-            <Bell className="w-6 h-6" />
-          </button>
-          <button className="text-white hover:text-blue-200 transition">
-            <MessageCircle className="w-6 h-6" />
-          </button>
-          <button
-            onClick={handleLogout}
-            className="text-white hover:text-blue-200 transition"
-            title="Logout"
-          >
-            <LogOut className="w-6 h-6" />
-          </button>
         </div>
       </div>
     </nav>
