@@ -1,11 +1,46 @@
+import { useState } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import Layout from '../components/Layout';
 import InfoCard from '../components/InfoCard';
 import CreditScoreGauge from '../components/CreditScoreGauge';
 import OfferCard from '../components/OfferCard';
+import ModalWrapper from '../components/ModalWrapper';
+import Modal1 from '../components/Modal1';
+import Modal2 from '../components/Modal2';
+import Modal3 from '../components/Modal3';
+import Modal4 from '../components/Modal4';
 import { newUserData } from '../data/newUserData';
 
 function NewUserDashboard() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const handleOpenModal = () => {
+    setCurrentStep(1);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setCurrentStep(1);
+  };
+
+  const handleContinue = () => {
+    if (currentStep < 4) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const handleFinish = () => {
+    handleCloseModal();
+  };
+
   return (
     <Layout userName={newUserData.userName} showGreeting={false}>
       <div className="px-6 py-10 max-w-[1400px] mx-auto">
@@ -90,7 +125,17 @@ function NewUserDashboard() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {newUserData.offers.map((offer) => (
-                    <OfferCard key={offer.id} offer={offer} />
+                    offer.id === 3 ? (
+                      <div
+                        key={offer.id}
+                        onClick={handleOpenModal}
+                        className="cursor-pointer"
+                      >
+                        <OfferCard offer={offer} />
+                      </div>
+                    ) : (
+                      <OfferCard key={offer.id} offer={offer} />
+                    )
                   ))}
                 </div>
               </div>
@@ -174,6 +219,13 @@ function NewUserDashboard() {
 
         </div>
       </div>
+
+      <ModalWrapper isOpen={isModalOpen} onClose={handleCloseModal}>
+        {currentStep === 1 && <Modal1 onContinue={handleContinue} />}
+        {currentStep === 2 && <Modal2 onContinue={handleContinue} onBack={handleBack} />}
+        {currentStep === 3 && <Modal3 onContinue={handleContinue} onBack={handleBack} />}
+        {currentStep === 4 && <Modal4 onFinish={handleFinish} onBack={handleBack} />}
+      </ModalWrapper>
     </Layout>
   );
 }

@@ -1,27 +1,49 @@
+import { useState } from 'react';
 import { ArrowRight, CheckCircle, Lightbulb } from "lucide-react";
 import Layout from "../components/Layout";
 import InfoCard from "../components/InfoCard";
 import CreditScoreGauge from "../components/CreditScoreGauge";
 import TaskItem from "../components/TaskItem";
 import ProgressBar from "../components/ProgressBar";
+import ModalWrapper from '../components/ModalWrapper';
+import Modal5 from '../components/Modal5';
 import { existingUserData } from "../data/existingUserData";
 
 function ExistingUserDashboard() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <Layout userName={existingUserData.userName} showGreeting={true}>
       <div className="mx-auto max-w-[1400px] space-y-1 px-8">
 
         {/* Header Section */}
-        <div className="flex flex-col gap-3">
-          <h2 className="text-3xl font-semibold tracking-tight text-slate-900">
-            Hi {existingUserData.userName},
-            <span className="ml-2 font-normal text-slate-500">
-              welcome back.
-            </span>
-          </h2>
-          <p className="text-sm text-slate-500">
-            Here’s a snapshot of your credit growth journey.
-          </p>
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex-1">
+            <h2 className="text-3xl font-semibold tracking-tight text-slate-900">
+              Hi {existingUserData.userName},
+              <span className="ml-2 font-normal text-slate-500">
+                welcome back.
+              </span>
+            </h2>
+            <p className="text-sm text-slate-500 mt-2">
+              Here's a snapshot of your credit growth journey.
+            </p>
+          </div>
+          <button
+            onClick={handleOpenModal}
+            className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2"
+          >
+            <span>View Coaching Plan</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Top Grid */}
@@ -212,6 +234,10 @@ function ExistingUserDashboard() {
         </InfoCard>
 
       </div>
+
+      <ModalWrapper isOpen={isModalOpen} onClose={handleCloseModal}>
+        <Modal5 />
+      </ModalWrapper>
     </Layout>
   );
 }
